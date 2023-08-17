@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Tracking</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: rgb(243, 243, 66);
+            border: none;
+            color: black;
+            text-align: center;
+            font-size: 16px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .value-output {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plant Tracking</h1>
+
+    <table border="2" cellpadding="5" cellspacing="0" align="center">
+        <tr>
+            <th>Number trays</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td><button class="button" onclick="updateName(1)">Tray 1</button></td>
+            <td class="value-output" id="value-output1"></td>
+        </tr>
+        <tr>
+            <td><button class="button" onclick="updateName(2)">Tray 2</button></td>
+            <td class="value-output" id="value-output2"></td>
+        </tr>
+        <tr>
+            <td><button class="button" onclick="updateName(3)">Tray 3</button></td>
+            <td class="value-output" id="value-output3"></td>
+        </tr>
+        <tr>
+            <td><button class="button" onclick="updateName(4)">Tray 4</button></td>
+            <td class="value-output" id="value-output4"></td>
+        </tr>
+    </table>
+
+    <script>
+        function updateName(trayNumber) {
+            const newName = prompt(`Enter name for Tray ${trayNumber}:`);
+            if (newName !== null) {
+                localStorage.setItem(`name${trayNumber}`, newName);
+                const output = document.getElementById(`value-output${trayNumber}`);
+                output.innerText = newName;
+            }
+        }
+
+        window.onload = function() {
+            for (let trayNumber = 1; trayNumber <= 4; trayNumber++) {
+                const value = localStorage.getItem(`name${trayNumber}`);
+                const output = document.getElementById(`value-output${trayNumber}`);
+                output.innerText = value || "No name set";
+            }
+        };
+    </script>
+</body>
+</html>
